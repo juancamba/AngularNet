@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  registerMode=false;
+  registerMode = false;
   users : any;
   
   constructor(private http: HttpClient) { }
@@ -24,4 +24,7 @@ export class HomeComponent implements OnInit {
     this.http.get('https://localhost:7015/api/Users').subscribe(users=>this.users = users)
   }
 
+  cancelRegisterMode(event: boolean){
+    this.registerMode = event
+  }
 }

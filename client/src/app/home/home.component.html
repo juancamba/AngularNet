@@ -14,7 +14,7 @@
         <div class="row justify-content-center">
             <div class="col-4">
                 <!-- pasamos users qeu lo pilla en este controller al child component-->
-                <app-register [usersFromHomeComponent]="users"> </app-register>  
+                <app-register [usersFromHomeComponent]="users" (cancelRegister)="cancelRegisterMode($event)"> </app-register>  
             </div>
         </div>
     </div>

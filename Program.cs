@@ -2,6 +2,7 @@ using System.Text;
 using Api.Data;
 using Api.Extensions;
 using Api.Interfaces;
+using Api.Middleware;
 using Api.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -31,7 +32,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.UseMiddleware<ExeptionMiddleware>();
 app.UseHttpsRedirection();
 //app.UseRouting();
 app.UseCors(x=>x.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:4200"));

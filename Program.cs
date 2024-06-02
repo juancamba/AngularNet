@@ -32,6 +32,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+Seed.Population(app);
 app.UseMiddleware<ExeptionMiddleware>();
 app.UseHttpsRedirection();
 //app.UseRouting();

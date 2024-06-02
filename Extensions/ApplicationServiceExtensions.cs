@@ -14,7 +14,7 @@ namespace Api.Extensions
         public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration config)
         {
             services.AddScoped<ITokenService, TokenService>();
-
+            services.AddScoped<IUserRepository, UserRepository>();
             var connectionString = config.GetConnectionString("DefaultConnection");
                 services.AddDbContext<DataContext>(options=> 
                 {

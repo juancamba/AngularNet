@@ -29,10 +29,10 @@ namespace Api.Entities
         public string Country { get; set; }
 
         public ICollection<Photo> Photos { get; set; }
-
+/* lo quitamos poruqe sino lo llama automapper directamente y llama a todos los campos
         public int GetAge(){
             return DateOfBirth.CalculateAge();
-        }
+        }*/
     }
 
 }

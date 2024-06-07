@@ -8,6 +8,7 @@ using Api.Data;
 using Api.DTOs;
 using Api.Entities;
 using Api.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SQLitePCL;
@@ -61,6 +62,7 @@ namespace Api.Controllers
 
         
         [HttpPost("login")]
+        [AllowAnonymous]
         public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
         {
             var user = await _context.Users.SingleOrDefaultAsync(x => x.Username == loginDto.Username);

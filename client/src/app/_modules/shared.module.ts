@@ -5,6 +5,7 @@ import { ToastrModule } from 'ngx-toastr';
 import {TabsModule} from 'ngx-bootstrap/tabs'
 import {NgxGalleryModule} from '@kolkov/ngx-gallery';
 
+
 @NgModule({
   declarations: [],
   imports: [
@@ -15,6 +16,7 @@ import {NgxGalleryModule} from '@kolkov/ngx-gallery';
     }),
     TabsModule.forRoot(),
     NgxGalleryModule
+
   ],
   //agregarlos en export
   exports:[
@@ -22,6 +24,7 @@ import {NgxGalleryModule} from '@kolkov/ngx-gallery';
     ToastrModule,
     TabsModule,
     NgxGalleryModule
+    
   ]
 })
 export class SharedModule { }

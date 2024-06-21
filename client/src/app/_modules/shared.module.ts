@@ -4,7 +4,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ToastrModule } from 'ngx-toastr';
 import {TabsModule} from 'ngx-bootstrap/tabs'
 import {NgxGalleryModule} from '@kolkov/ngx-gallery';
-
+import {BsDatepickerModule} from  'ngx-bootstrap/datepicker'
 
 @NgModule({
   declarations: [],
@@ -15,6 +15,7 @@ import {NgxGalleryModule} from '@kolkov/ngx-gallery';
       positionClass: 'toast-bottom-right'
     }),
     TabsModule.forRoot(),
+    BsDatepickerModule.forRoot(),
     NgxGalleryModule
 
   ],
@@ -23,7 +24,9 @@ import {NgxGalleryModule} from '@kolkov/ngx-gallery';
     BsDropdownModule,
     ToastrModule,
     TabsModule,
-    NgxGalleryModule
+    NgxGalleryModule,
+    BsDatepickerModule
+  
     
   ]
 })

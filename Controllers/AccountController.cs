@@ -8,6 +8,7 @@ using Api.Data;
 using Api.DTOs;
 using Api.Entities;
 using Api.Interfaces;
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -21,14 +22,16 @@ namespace Api.Controllers
     {
         private readonly DataContext _context;
         private readonly ITokenService _tokenService;
+        private readonly IMapper _maper;
 
-        public AccountController(DataContext context, ITokenService tokenService)
+        public AccountController(DataContext context, ITokenService tokenService, IMapper maper)
         {
             _context = context;
             _tokenService = tokenService;
+            _maper = maper;
         }
 
-        
+
 
         [HttpPost("register")]
         public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
@@ -36,15 +39,14 @@ namespace Api.Controllers
             if(await UserExists(registerDto.Username)) 
                 return BadRequest("Username already taken");
 
+            var user = _maper.Map<AppUser>(registerDto);
             
             using var hmac = new HMACSHA512();
 
-            var user = new AppUser
-            {
-                Username = registerDto.Username.ToLower(),
-                PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password)),
-                PasswordSalt = hmac.Key
-            };
+            user.Username = registerDto.Username.ToLower();
+            user.PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password));
+            user.PasswordSalt = hmac.Key;
+            
 
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
@@ -52,7 +54,8 @@ namespace Api.Controllers
             return new UserDto{
                 Username = user.Username,
                 Token = _tokenService.CreateToken(user),
-                PhotoUrl = user.Photos.FirstOrDefault(x=>x.IsMain)?.Url
+                //PhotoUrl = user.Photos.FirstOrDefault(x=>x.IsMain)?.Url,
+                KnownAs = user.KnownAs
             };
         }
 
